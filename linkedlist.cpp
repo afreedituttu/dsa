@@ -80,7 +80,7 @@ int main(){
                 break;
         }
     }while(exit == 0);
-    return 0;
+     0;
 };
 
 void Linkedlist::display(){
@@ -94,16 +94,14 @@ void Linkedlist::display(){
 void Linkedlist::find(int value){
     Node *temp = head;
     int index=0;
-    while(temp->value != value && temp != nullptr){
+    while(temp != nullptr && temp->value != value){
         temp = temp->next;
         index++;
     }
     if(temp == nullptr){
         cout << "\nElement does not exist \n";
-        return;
     }else{
-        cout << "\nElement " << value << " found at postion " << index;
-        return;
+        cout << "\nElement " << value << " found at postion " << index + 1;
     }
 };
 void Linkedlist::insert(int value){
@@ -117,7 +115,7 @@ void Linkedlist::insert(int value){
             current = current->next;
         }
         current->next = temp;
-        return;
+        
     }
 };
 void Linkedlist::insertAfterPosWithVal(int pos_value, int value){
@@ -127,16 +125,16 @@ void Linkedlist::insertAfterPosWithVal(int pos_value, int value){
         temp->next = head;
         head = temp;
     }else{
-        while(current->value != pos_value && current != nullptr){
+        while(current != nullptr && current->value != pos_value){
             current = current->next;
         }
         if(temp == nullptr){
             cout << "\n Element with the give values does not exist \n";
-            return;
+            
         }else{
             temp->next = current->next;
             current->next = temp;
-            return;
+            
         }
     }
 }
@@ -146,20 +144,20 @@ void Linkedlist::remove(int value){
     if(temp->value == value){
         head = head->next;
         delete temp;
-        return;
+        
     }
-    while(temp->value != value && temp != nullptr){
+    while(temp != nullptr && temp->value != value){
         prev = temp;
         temp = temp->next;
     }
     cout << temp;
     if(temp == nullptr){
         cout << "\nElement Not found\n";
-        return;
+        
     }else{
         prev->next = temp->next;
         delete temp;
-        return;
+        
     }
 };
 
@@ -167,13 +165,13 @@ void Linkedlist::remove(int value){
 void Linkedlist::sort(){
     Node *current = head;
     Node *future;
-    Node *temp;
+    int temp;
     for(current = head; current->next != nullptr; current = current->next){
         for(future = current->next; future != nullptr; future = future->next){
             if(current->value > future->value){
-                temp = current;
-                current = future;
-                future = temp;
+                temp = current->value;
+                current->value = future->value;
+                future->value = temp;
             }
         }
     }
